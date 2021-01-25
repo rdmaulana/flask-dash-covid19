@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Indonesia Covid-19 Dashboard</title>
+    <!-- CSS files -->
+    <link href="{{  url_for('static', filename='css/tabler.min.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='css/tabler-vendors.min.css') }}" rel="stylesheet"/>
+  </head>
+  <body class="antialiased">
+    <div class="page">
+      <header class="navbar navbar-expand-md navbar-light d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href=".">
+              Indonesia Covid-19 Dashboard
+            </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                <span class="badge bg-red"></span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
+                <div class="card">
+                  <div class="card-body">
+                    Welcome to Indonesia Covid-19 Dashboard
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar navbar-light">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="./index.html" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Home
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
+                <form action="." method="get">
+                  <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
+                    </span>
+                    <input type="text" class="form-control" placeholder="Search…" aria-label="Search in website">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="container-xl">
+          <!-- Page title -->
+          <div class="page-header d-print-none">
+            <div class="row align-items-center">
+              <div class="col">
+                <!-- Page pre-title -->
+                <div class="page-pretitle">
+                  Overview
+                </div>
+                <h2 class="page-title">
+                  Dashboard
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div class="row row-deck row-cards">
+            <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="subheader">Total Cases</div>
+                        <div class="ms-auto lh-1">
+                        <!-- <div class="dropdown">
+                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item active" href="#">Last 7 days</a>
+                            <a class="dropdown-item" href="#">Last 30 days</a>
+                            <a class="dropdown-item" href="#">Last 3 months</a>
+                            </div>
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="h1 mb-3">{{total | intFormat}}</div>
+                    <div class="d-flex mb-2">
+                        <div>New cases</div>
+                        <div class="ms-auto">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            {{new_cases | intFormat}} <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="subheader">Active cases</div>
+                        <div class="ms-auto lh-1">
+                        <!-- <div class="dropdown">
+                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item active" href="#">Last 7 days</a>
+                            <a class="dropdown-item" href="#">Last 30 days</a>
+                            <a class="dropdown-item" href="#">Last 3 months</a>
+                            </div>
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="h1 mb-0 me-2">{{active_cases | intFormat}}</div>
+                        <div class="me-auto">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            {{new_cases | intFormat}} <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                        </div>
+                    </div>
+                    </div>
+                    <div id="chart-revenue-bg" class="chart-sm"></div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="subheader">Recovered</div>
+                        <div class="ms-auto lh-1">
+                        <!-- <div class="dropdown">
+                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item active" href="#">Last 7 days</a>
+                            <a class="dropdown-item" href="#">Last 30 days</a>
+                            <a class="dropdown-item" href="#">Last 3 months</a>
+                            </div>
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="h1 mb-3 me-2">{{recovered_cases | intFormat}}</div>
+                    </div>
+                    <div id="chart-new-clients" class="chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="subheader">Deaths</div>
+                        <div class="ms-auto lh-1">
+                        <!-- <div class="dropdown">
+                            <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item active" href="#">Last 7 days</a>
+                            <a class="dropdown-item" href="#">Last 30 days</a>
+                            <a class="dropdown-item" href="#">Last 3 months</a>
+                            </div>
+                        </div> -->
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-baseline">
+                        <div class="h1 mb-3 me-2">{{deaths | intFormat}}</div>
+                        <div class="me-auto">
+                        <span class="text-green d-inline-flex align-items-center lh-1">
+                            {{new_deaths | intFormat}} <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3 17 9 11 13 15 21 7" /><polyline points="14 7 21 7 21 14" /></svg>
+                        </span>
+                        </div>
+                    </div>
+                    <div id="chart-active-users" class="chart-sm"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                    <h3 class="card-title">Case Statistics</h3>
+                    <div class="ms-auto">
+                        <div class="dropdown">
+                          <p>Last 3 Months</p>
+                          <!-- <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a> -->
+                          <!-- <div class="dropdown-menu dropdown-menu-end">
+                              <a class="dropdown-item active" href="#">Last 7 days</a>
+                              <a class="dropdown-item" href="#">Last 30 days</a>
+                              <a class="dropdown-item" href="#">Last 3 months</a>
+                          </div> -->
+                        </div>
+                    </div>
+                    </div>
+                    <div id="chart-cases"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-xl-4">
+                <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h3 class="card-title">Breakdown</h3>
+                        <div class="ms-auto">
+                            <!-- <div class="dropdown">
+                              <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last 7 days</a>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                  <a class="dropdown-item active" href="#">Last 7 days</a>
+                                  <a class="dropdown-item" href="#">Last 30 days</a>
+                                  <a class="dropdown-item" href="#">Last 3 months</a>
+                              </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div id="chart-total-sales"></div>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="card">
+                <div class="card-body p-2 text-center">
+                    <br>
+                    <div class="h1 m-0">{{total_populations | intFormat}}</div>
+                    <div class="text-muted mb-3">Total Populations</div>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                <div class="card-body p-2 text-center">
+                    <br>
+                    <div class="h1 m-0">{{total_tests | intFormat}}</div>
+                    <div class="text-muted mb-3">Total Tests</div>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                <div class="card-body p-2 text-center">
+                    <br>
+                    <div class="h1 m-0">{{new_cases | intFormat}}</div>
+                    <div class="text-muted mb-3">New Cases</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                      <h3 class="card-title">Breakdown Case Tables</h3>
+                  </div>
+                  <div class="card-table table-responsive">
+                      <table class="table table-vcenter">
+                          <thead>
+                              <tr>
+                                  <th>#</th>
+                                  <th>Date</th>
+                                  <th>New Cases</th>
+                                  <th>Deaths</th>
+                                  <th>Total Tests</th>
+                                  <th>Total Cases</th>
+                                  <th>Total Recovered</th>
+                              </tr>
+                          </thead>
+                          {% for data in dtCases.items %}
+                              <tr>
+                                  <td>{{loop.index}}</td>
+                                  <td>
+                                      {{data.date}}
+                                  </td>
+                                  <td class="text-muted">{{data.new_cases}}</td>
+                                  <td class="text-muted">{{data.total_deaths}}</td>
+                                  <td class="text-muted">
+                                      {{data.total_tests}}
+                                  </td>
+                                  <td class="text-muted">
+                                      {{data.total}}
+                                  </td>
+                                  <td class="text-muted">
+                                      {{data.recovered}}
+                                  </td>
+                              </tr>
+                          {% endfor %}
+                      </table>
+                  </div>
+                  <div class="card-footer d-flex align-items-center">
+                    <p class="m-0 text-muted">Showing page<span> {{ dtCases.page }}</span> of <span>{{ dtCases.pages }}</span></p>
+                    <ul class="pagination m-0 ms-auto">
+                      <li class="page-item {% if dtCases.page == 1 %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', page=dtCases.prev_num) }}" tabindex="-1" aria-disabled="true">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15 6 9 12 15 18" /></svg>
+                          prev
+                        </a>
+                      </li>
+                      <!-- Loop through the number of pages to display a link for each-->
+                      {% for page_num in dtCases.iter_pages(left_edge=1, right_edge=1, left_current=5, right_current=5) %}
+                          {% if page_num %}
+                              <!-- Check for the active page and set the link to "Active"-->
+                              {% if dtCases.page == page_num %}
+                              <li class="page-item active"><a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a></li>
+                              {% else %}
+                              <li class="page-item"><a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a></li>
+                              {% endif %}
+                          {% else %}
+                          {% endif %}
+                      {% endfor %}
+                      <li class="page-item {% if dtCases.page == dtCases.pages %}disabled{% endif %}">
+                        <a class="page-link" href="{{ url_for('index', page=dtCases.next_num) }}">
+                          next <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9 6 15 12 9 18" /></svg>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-lg-auto ms-lg-auto">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">Themes by <a href="https://tabler.io" class="link-secondary">Tabler</a></li>
+                </ul>
+              </div>
+              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2021.
+                    Made with <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg> by @radxden
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <script type="application/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+    <script type="application/javascript" src="{{ url_for('static', filename='js/apexcharts.min.js') }}"></script>
+    <!-- Tabler Core -->
+    <script type="application/javascript" src="{{ url_for('static', filename='js/tabler.min.js') }}"></script>
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-total-sales'), {
+      		chart: {
+      			type: "donut",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{{active_cases}}, {{recovered_cases}}, {{deaths}}],
+      		labels: ["Active", "Recovered", "Death"],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		colors: ["#206bc4", "#bfe399", "#FF0000"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      		},
+      		tooltip: {
+      			fillSeriesColor: false
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-cases'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 240,
+      			parentHeightOffset: 0,
+      			toolbar: {
+      				show: false,
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      			stacked: true,
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "New Cases",
+      			data: [{% for case in chart_new_case %}{{case}}{% if not loop.last %}, {% endif %}{% endfor %}]
+      		},{
+      			name: "Death Cases",
+      			data: [{% for case in chart_death_cases %}{{case}}{% if not loop.last %}, {% endif %}{% endfor %}]
+      		}],
+      		grid: {
+      			padding: {
+      				top: -20,
+      				right: 0,
+      				left: -4,
+      				bottom: -4
+      			},
+      			strokeDashArray: 4,
+      			xaxis: {
+      				lines: {
+      					show: true
+      				}
+      			},
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			{% for date in chart_date_range %}'{{date}}'{% if not loop.last %}, {% endif %}{% endfor %}
+      		],
+      		colors: ["#3b5998", "#FF0000", "#ea4c89"],
+      		legend: {
+      			show: true,
+      			position: 'bottom',
+      			height: 32,
+      			offsetY: 8,
+      			markers: {
+      				width: 8,
+      				height: 8,
+      				radius: 100,
+      			},
+      			itemMargin: {
+      				horizontal: 8,
+      			},
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-revenue-bg'), {
+      		chart: {
+      			type: "area",
+      			fontFamily: 'inherit',
+      			height: 40.0,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: .16,
+      			type: 'solid'
+      		},
+      		stroke: {
+      			width: 2,
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "New cases",
+      			data: [{% for case in chart_new_case %}{{case}}{% if not loop.last %}, {% endif %}{% endfor %}]
+      		}],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			{% for date in chart_date_range %}'{{date}}'{% if not loop.last %}, {% endif %}{% endfor %}
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+
+    <script>
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-new-clients'), {
+      		chart: {
+      			type: "line",
+      			fontFamily: 'inherit',
+      			height: 40.0,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		stroke: {
+      			width: [2, 1],
+      			dashArray: [0, 3],
+      			lineCap: "round",
+      			curve: "smooth",
+      		},
+      		series: [{
+      			name: "Recovered",
+      			data: [{% for case in chart_recovered_cases %}{{case}}{% if not loop.last %}, {% endif %}{% endfor %}]
+      		}],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			{% for date in chart_date_range %}'{{date}}'{% if not loop.last %}, {% endif %}{% endfor %}
+      		],
+      		colors: ["#206bc4", "#a8aeb7"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+    
+    <script>
+      //death charts
+      // @formatter:off
+      document.addEventListener("DOMContentLoaded", function () {
+      	window.ApexCharts && (new ApexCharts(document.getElementById('chart-active-users'), {
+      		chart: {
+      			type: "bar",
+      			fontFamily: 'inherit',
+      			height: 40.0,
+      			sparkline: {
+      				enabled: true
+      			},
+      			animations: {
+      				enabled: false
+      			},
+      		},
+      		plotOptions: {
+      			bar: {
+      				columnWidth: '50%',
+      			}
+      		},
+      		dataLabels: {
+      			enabled: false,
+      		},
+      		fill: {
+      			opacity: 1,
+      		},
+      		series: [{
+      			name: "Deaths",
+      			data: [{% for case in chart_death_cases %}{{case}}{% if not loop.last %}, {% endif %}{% endfor %}]
+      		}],
+      		grid: {
+      			strokeDashArray: 4,
+      		},
+      		xaxis: {
+      			labels: {
+      				padding: 0
+      			},
+      			tooltip: {
+      				enabled: false
+      			},
+      			axisBorder: {
+      				show: false,
+      			},
+      			type: 'datetime',
+      		},
+      		yaxis: {
+      			labels: {
+      				padding: 4
+      			},
+      		},
+      		labels: [
+      			{% for date in chart_date_range %}'{{date}}'{% if not loop.last %}, {% endif %}{% endfor %}
+      		],
+      		colors: ["#206bc4"],
+      		legend: {
+      			show: false,
+      		},
+      	})).render();
+      });
+      // @formatter:on
+    </script>
+  </body>
+</html>
